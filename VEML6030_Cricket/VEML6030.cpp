@@ -24,7 +24,7 @@ VEML6030::VEML6030(I2Cdev* i2c_bus)
 
 void VEML6030::init(uint8_t IT, uint8_t Gain, uint8_t Persistance)
 {
-  // byte structure is (Low Byte/ High Byte)
+  // byte structure is (Low Byte, High Byte)
   // High byte, set gain and integration time high bits, 
   // Low byte, set integration time low bits, set persistance, enable interrupt, set ALS power on
   uint8_t data[2] = {((IT & 0x03) << 6) | Persistance << 4 | 0x02, (Gain << 3) | ((IT & 0x0C) >> 2)};  
