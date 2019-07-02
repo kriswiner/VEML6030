@@ -104,7 +104,7 @@ void VEML6030::enable()
 {
   uint8_t rawData[2] = {0, 0};
   _i2c_bus->readBytes(VEML6030_ADDRESS, VEML6030_ALS_CONF, 2, &rawData[0]); // read existing configuration data
-  uint8_t data[2] = {rawData[1], rawData[0] & ~(0x01)}; // ALS power on
+  uint8_t data[2] = {rawData[0] & ~(0x01), rawData[1]}; // ALS power on
   _i2c_bus->writeBytes(VEML6030_ADDRESS, VEML6030_ALS_CONF, 2, &data[0]);
 }
 
@@ -113,6 +113,6 @@ void VEML6030::disable()
 {
   uint8_t rawData[2] = {0, 0};
   _i2c_bus->readBytes(VEML6030_ADDRESS, VEML6030_ALS_CONF, 2, &rawData[0]); // read existing configuration data
-  uint8_t data[2] = {rawData[1], rawData[0] | 0x01}; // ALS power off
+  uint8_t data[2] = {rawData[0] | 0x01, rawData[1]}; // ALS power off
   _i2c_bus->writeBytes(VEML6030_ADDRESS, VEML6030_ALS_CONF, 2, &data[0]);
 }
